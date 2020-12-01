@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Consultorio.WebAPI.Data;
-using Consultorio.WebAPI.Model;
+using Consultorio.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,9 +15,9 @@ namespace Consultorio.WebAPI.Controllers
     
     public class ValuesController : ControllerBase
     {
-        public readonly DataContext _context;
+        public readonly ConsultorioContext _context;
 
-        public ValuesController(DataContext context)
+        public ValuesController(ConsultorioContext context)
         {
             _context = context;
         }
@@ -29,7 +28,7 @@ namespace Consultorio.WebAPI.Controllers
         {
             try
             {
-                var results = await _context.Agendas.ToListAsync();
+                var results = await _context.Atendimentos.ToListAsync();
 
                 return Ok(results);
 
@@ -49,7 +48,7 @@ namespace Consultorio.WebAPI.Controllers
         {
             try
             {
-                var results = await _context.Agendas.FirstOrDefaultAsync(x => x.AgendaId == id);
+                var results = await _context.Atendimentos.FirstOrDefaultAsync(x => x.Id == id);
 
                 return Ok(results);
 
