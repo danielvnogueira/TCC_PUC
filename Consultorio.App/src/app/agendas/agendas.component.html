@@ -1,0 +1,64 @@
+<!-- <div *ngFor="let agenda of agendas">
+  Tema: {{agenda.tema}}
+  <BR>
+  Local: {{agenda.local}} 
+  <HR>
+</div> -->
+
+<div class="form-inline"><label class="mr-2">Filtrar </label>
+  <div class="form-group mb-2">
+    <input type="text" 
+    class="form-control mr-2"
+    placeholder="Buscar"
+    [(ngModel)]="filtroLista">
+  </div>
+</div>
+<h3><label class="mr-2">Filtro: </label> {{filtroLista}}</h3>
+<table class="table talbe-striped">
+  <thead class="thead-dark">
+    <tr >
+      <th><button class="btn btn-sm btn-outline-primary"
+        (click)="alternarImagem()">
+        Mostrar</button></th>
+      <th>#</th>
+      <th>Paciente</th>
+      <th>Data</th>
+      <th>Local</th>
+      <th>Sintomas</th>
+      <th>Afastado</th>
+      <th>Status</th>
+      <th>Opções</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="agendas && agendas.length">
+    <tr *ngFor="let agenda of agendasFiltradas">
+      <td>
+        <img *ngIf="mostrarImagem"
+        src="http://localhost:5000/img/{{agenda.imageUrl}}" 
+        [style.width.px]="imagemLargura"
+        [style.margin.px]="imagemMargem"
+         >
+      </td>
+      <td>{{agenda.agendaId}}</td>
+      <td>{{agenda.nomePaciente | uppercase}}</td>
+      <td>{{agenda.data}}</td>
+      <td>{{agenda.local}}</td>
+      <td>{{agenda.sintomas}}</td>
+      <td>{{agenda.diasAfastado}}</td>
+      <td>{{agenda.status}}</td>
+      <td>
+        <button class="btn btn-success"></button>
+        <button class="btn btn-danger"></button>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot *ngIf="!agendas.length">
+    <tr>
+      <td colspan="9" class="text-center">
+        <h4>
+          Nenhum consulta retornada!
+        </h4>
+      </td>
+    </tr>
+  </tfoot>
+</table>
